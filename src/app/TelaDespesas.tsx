@@ -2,15 +2,16 @@ import { useEffect, useState } from 'react';
 import { carregaDespesas, IDespesa } from './backend';
 import TabelaDespessas from './TabelaDespesas';
 
-import Container from '@material-ui/core/Container';
-import Box from '@material-ui/core/Box';
+import Container from '@mui/material/Container';
+import Box from '@mui/material/Box';
 import { formataValor } from './util';
-import { useHistory, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import SelecaoAnoMes from './SelecaoAnoMes';
 
 export default function TelaDespesa() {
-  const { anoMes } = useParams<{ anoMes: string }>();
-  const history = useHistory();
+  const params = useParams<{ anoMes: string }>();
+  const anoMes = params.anoMes || '2021-06';
+  const navigate = useNavigate();
   const [despesas, setDespesas] = useState<IDespesa[]>([]);
 
   useEffect(() => {
@@ -36,7 +37,7 @@ export default function TelaDespesa() {
   );
 
   function onChangeAnoMes(novoAnoMes: string) {
-    history.push(`/despesas/${novoAnoMes}`);
+    navigate(`/despesas/${novoAnoMes}`);
   }
 }
 

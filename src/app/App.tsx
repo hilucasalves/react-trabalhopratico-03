@@ -1,15 +1,13 @@
-import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
+import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
 import TelaDespesas from './TelaDespesas';
 
 function App() {
   return (
     <BrowserRouter>
-      <Switch>
-        <Route path="/despesas/:anoMes">
-          <TelaDespesas />
-        </Route>
-        <Redirect to="/despesas/2021-06" />
-      </Switch>
+      <Routes>
+        <Route path="/despesas/:anoMes" element={<TelaDespesas />} />
+        <Route path="/" element={<Navigate to="/despesas/2021-06" />} />
+      </Routes>
     </BrowserRouter>
   );
 }
